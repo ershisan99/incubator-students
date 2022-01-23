@@ -9,7 +9,7 @@ export const Home = () => {
             <title>Student's page</title>
             <link rel="icon" href="/favicon.ico" />
          </Head>
-         <main className="text-white">Some stats and whatnot</main>
+         <main>Some stats and whatnot</main>
       </div>
    );
 };

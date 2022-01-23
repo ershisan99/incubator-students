@@ -3,14 +3,17 @@ import type { AppProps } from "next/app";
 import Layout from "../components/Layout";
 import { ApolloProvider } from "@apollo/client";
 import client from "../apollo-client";
+import { ThemeProvider } from "next-themes";
 function MyApp({ Component, pageProps }: AppProps) {
-	return (
-		<ApolloProvider client={client}>
-			<Layout>
-				<Component {...pageProps} />
-			</Layout>
-		</ApolloProvider>
-	);
+   return (
+      <ApolloProvider client={client}>
+         <ThemeProvider attribute="class">
+            <Layout>
+               <Component {...pageProps} />
+            </Layout>
+         </ThemeProvider>
+      </ApolloProvider>
+   );
 }
 
 export default MyApp;
