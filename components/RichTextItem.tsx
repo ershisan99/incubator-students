@@ -17,8 +17,8 @@ const RichTextItem = (props: MyRichTextPropTypes) => {
       Prism.highlightAll();
    }, []);
    return (
-      <div className="container w-100 lg:w-4/5 mx-auto flex flex-col max-w-6xl">
-         <div className="p-4 flex flex-col dark:bg-slate-800 bg-white rounded-lg shadow-xl align-middle justify-center mt-4 w-100  mx-2">
+      <div className="container prose prose-slate dark:prose-invert max-w-6xl w-100 sm:w-11/12 lg:w-4/5 mx-auto flex flex-col">
+         <div className="px-6 py-4 flex flex-col dark:bg-slate-800 bg-white rounded-lg shadow-xl align-middle justify-center mt-4 w-100  mx-3">
             <RichText
                content={props.content}
                renderers={{
@@ -28,20 +28,19 @@ const RichTextItem = (props: MyRichTextPropTypes) => {
                   bold: ({ children }) => <b>{children}</b>,
                   li: ({ children }) => <li>{children} </li>,
                   img: (props) => (
-                     <img
-                        className="place-self-center"
-                        src={props.src}
-                        alt={props.altText}
-                        style={{ maxWidth: "800px" }}
-                     />
+                     <div>
+                        <img src={props.src} alt={props.altText} />
+                     </div>
                   ),
                   code_block: ({ children }) => (
-                     <pre className="language-tsx">
+                     <pre className=" language-tsx">
                         <code>{children}</code>
                      </pre>
                   ),
                   code: ({ children }) => (
-                     <code className="language-tsx">{children}</code>
+                     <span className=" not-prose">
+                        <code className="language-tsx">{children}</code>
+                     </span>
                   ),
                }}
             />

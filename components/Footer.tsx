@@ -2,7 +2,7 @@ import React from "react";
 import { DiGithubBadge } from "react-icons/di";
 const Footer = () => {
    return (
-      <footer className="flex items-center justify-center w-full h-24 border-t">
+      <footer className="flex items-center justify-center w-full h-24 border-t mt-10 not-prose">
          <a
             className="flex items-center justify-center"
             href="https://github.com/ershisan99"
