@@ -9,7 +9,7 @@ const Notes = (props: any) => {
       <div>
          {props.notes.map((note: any) => (
             <>
-               <Title>{note.category}</Title>
+               <Title>{note.title}</Title>
                {note.content.map((contentRaw: any) => (
                   <Card content={contentRaw.raw} />
                ))}
@@ -26,7 +26,7 @@ export async function getStaticProps() {
       query: gql`
          query {
             notes {
-               category
+               title
                content {
                   raw
                }
