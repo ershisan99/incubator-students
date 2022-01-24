@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { gql } from "@apollo/client";
+import React from "react";
+import client from "../apollo-client";
 import Link from "next/link";
 import { useTheme } from "next-themes";
 import { MdOutlineDarkMode, MdOutlineLightMode } from "react-icons/md";
@@ -12,6 +14,7 @@ const categories = [
 
 const Header = (props: any) => {
    const { theme, setTheme } = useTheme();
+   console.log(props);
 
    return (
       <nav className=" container flex mx-auto justify-center flex-nowrap px-10 mb-8">
@@ -60,3 +63,34 @@ const Header = (props: any) => {
 };
 
 export default Header;
+export async function getStaticProps() {
+   const { data } = await client.query({
+      query: gql`
+         query Categories {
+            todolistManuals {
+               slug
+               title
+               manualId
+            }
+            homeworksByIgnat {
+               homeworkId
+               slug
+               title
+            }
+            homeworks {
+               slug
+               title
+               homeworkId
+            }
+            notes {
+               slug
+               title
+            }
+         }
+      `,
+   });
+
+   return {
+      props: { data: data },
+   };
+}
