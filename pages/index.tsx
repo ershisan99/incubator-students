@@ -1,6 +1,4 @@
 import Head from "next/head";
-import { gql } from "@apollo/client";
-import client from "../apollo-client";
 
 export const Home = () => {
    return (
