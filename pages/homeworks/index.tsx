@@ -1,10 +1,8 @@
-import { RichTextContent } from "@graphcms/rich-text-types";
 import { gql } from "@apollo/client";
 import React from "react";
 import client from "../../apollo-client";
-import RichTextItem from "../../components/RichTextItem";
-import { totalmem } from "os";
 import Title from "../../components/Title";
+import Card from "../../components/Card";
 
 type homeworksPropTypes = {
    homeworks: Array<homeworkPropTypes>;
@@ -25,7 +23,7 @@ const Homeworks = (props: any) => {
             <>
                <Title>{homework.title}</Title>
                {homework.task.map((task: any) => (
-                  <RichTextItem content={task.raw} />
+                  <Card content={task.raw} />
                ))}
             </>
          ))}

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useTheme } from "next-themes";
 import { MdOutlineDarkMode, MdOutlineLightMode } from "react-icons/md";
 import { IconContext } from "react-icons";
+import { RiArrowDropDownLine } from "react-icons/ri";
 const Header = () => {
    const categories = [
       { name: "Homeworks", slug: "homeworks" },
@@ -17,42 +18,49 @@ const Header = () => {
    if (!mounted) return null;
 
    return (
-      <div className="container mx-auto px-10 mb-8">
-         <div className="border-b w-full inline-block dark:border-white border-slate-900 py-8">
-            <div className="md:float-left block">
-               <Link href="/">
-                  <span className="cursor-pointer font-bold text-4xl ">
-                     it-incubator.by
-                  </span>
-               </Link>
-            </div>
-            <div className="hidden md:float-right md:contents">
-               {categories.map((category) => (
-                  <Link key={category.slug} href={`/${category.slug}`}>
-                     <span className="md:float-right mt-2 align-middle ml-4 font-semibold cursor-pointer">
-                        {category.name}
-                     </span>
-                  </Link>
-               ))}
-            </div>
-            <div className="hover:cursor-pointer float-right mt-2 mr-4">
-               <IconContext.Provider
-                  value={{
-                     size: "1.5rem",
-                     style: { verticalAlign: "middle" },
-                  }}
-               >
-                  <div>
-                     {theme === "dark" ? (
-                        <MdOutlineLightMode onClick={() => setTheme("light")} />
-                     ) : (
-                        <MdOutlineDarkMode onClick={() => setTheme("dark")} />
-                     )}
+      <nav className=" container flex mx-auto justify-center flex-nowrap px-10 mb-8">
+         <div className=" flex container border-b w-full flex-nowrap align-middle justify-start dark:border-white border-slate-900 py-6">
+            <Link href="/">
+               <div className=" flex flex-auto flex-nowrap cursor-pointer self-start font-bold text-4xl ">
+                  it-incubator.by
+               </div>
+            </Link>
+            <div className=" md:flex hidden flex-auto items-center justify-end">
+               <div className="flex justify-end items-center">
+                  <div className="px-4">
+                     <IconContext.Provider
+                        value={{
+                           size: "1.5rem",
+                           style: { verticalAlign: "middle" },
+                        }}
+                     >
+                        {theme === "dark" ? (
+                           <MdOutlineLightMode
+                              onClick={() => setTheme("light")}
+                           />
+                        ) : (
+                           <MdOutlineDarkMode
+                              onClick={() => setTheme("dark")}
+                           />
+                        )}
+                     </IconContext.Provider>
                   </div>
-               </IconContext.Provider>
+                  {categories.map((category) => (
+                     <span>
+                        <Link key={category.slug} href={`/${category.slug}`}>
+                           <button className="text-centre  inline-flex font-semibold cursor-pointer items-center justify-items-center">
+                              {category.name}
+                              <IconContext.Provider value={{ size: "2rem" }}>
+                                 <RiArrowDropDownLine />
+                              </IconContext.Provider>
+                           </button>
+                        </Link>
+                     </span>
+                  ))}
+               </div>
             </div>
          </div>
-      </div>
+      </nav>
    );
 };
 

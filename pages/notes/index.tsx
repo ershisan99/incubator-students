@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 import React from "react";
 import client from "../../apollo-client";
-import RichTextItem from "../../components/RichTextItem";
+import Card from "../../components/Card";
 import Title from "../../components/Title";
 
 const Notes = (props: any) => {
@@ -11,7 +11,7 @@ const Notes = (props: any) => {
             <>
                <Title>{note.category}</Title>
                {note.content.map((contentRaw: any) => (
-                  <RichTextItem content={contentRaw.raw} />
+                  <Card content={contentRaw.raw} />
                ))}
             </>
          ))}
