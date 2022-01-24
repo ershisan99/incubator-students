@@ -14,6 +14,7 @@
     "graphql": "^16.2.0",
     "next": "latest",
     "next-themes": "^0.0.15",
+    "prism-themes": "^1.9.0",
     "prismjs": "^1.26.0",
     "react": "^17.0.2",
     "react-apollo": "^3.1.5",

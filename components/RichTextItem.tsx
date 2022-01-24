@@ -5,7 +5,7 @@ import Prism from "prismjs";
 import "prismjs/components/prism-typescript";
 import "prismjs/components/prism-jsx";
 import "prismjs/components/prism-tsx";
-import "prismjs/themes/prism-night-owl.css";
+import "prism-themes/themes/prism-night-owl.css";
 import "prismjs/plugins/show-language/prism-show-language";
 
 type MyRichTextPropTypes = {
