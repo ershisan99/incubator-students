@@ -6,7 +6,7 @@ import { useTheme } from "next-themes";
 import { MdOutlineDarkMode, MdOutlineLightMode } from "react-icons/md";
 import { IconContext } from "react-icons";
 import { Dropdown } from "./Dropdown";
-import Homeworks from "../pages/homeworks";
+import { HiMenu } from "react-icons/hi";
 
 const HEADER_QUERY = gql`
    query Categories {
@@ -67,14 +67,31 @@ const Header = () => {
    console.log(todolistManuals);
 
    return (
-      <nav className=" container mx-auto flex justify-center flex-nowrap px-10 mb-8">
-         <div className=" flex container border-b w-full flex-nowrap align-middle justify-between dark:border-white border-slate-900 py-6">
+      <nav className=" lg:container lg:mx-auto flex justify-center flex-nowrap lg:px-10 mb-8 w-full">
+         <div className=" flex lg:container border-b lg:w-full w-screen flex-nowrap align-middle justify-between dark:border-white border-slate-900 py-6 lg:mx-0 mx-6">
+            <div className="lg:hidden flex items-center">
+               <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+               >
+                  <path
+                     strokeLinecap="round"
+                     strokeLinejoin="round"
+                     strokeWidth={2}
+                     d="M4 6h16M4 12h16M4 18h16"
+                  />
+               </svg>
+            </div>
+
             <Link href="/">
-               <div className=" flex cursor-pointer font-bold text-4xl ">
+               <div className=" flex cursor-pointer font-bold text-4xl lg:px-0 pr-4 ">
                   it-incubator.by
                </div>
             </Link>
-            <div className=" lg:flex hidden  items-center justify-end">
+            <div className=" lg:flex hidden items-center justify-end">
                <div className="flex items-center cursor-pointer">
                   <div className="px-4">
                      <IconContext.Provider
