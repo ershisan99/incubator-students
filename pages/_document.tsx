@@ -16,7 +16,7 @@ class MyDocument extends Document {
       return (
          <Html>
             <Head />
-            <body className="prose dark:prose-invert max-w-none dark:bg-slate-900 bg-white ">
+            <body className="prose dark:prose-invert max-w-none dark:bg-slate-900 bg-white  ">
                <Main />
                <NextScript />
             </body>
