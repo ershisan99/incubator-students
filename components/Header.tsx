@@ -67,23 +67,10 @@ const Header = () => {
    console.log(todolistManuals);
 
    return (
-      <nav className=" lg:container lg:mx-auto flex justify-center flex-nowrap lg:px-10 mb-8 w-full">
-         <div className=" flex lg:container border-b lg:w-full w-screen flex-nowrap align-middle justify-between dark:border-white border-slate-900 py-6 lg:mx-0 mx-6">
+      <nav className=" flex justify-center flex-nowrap mb-8 w-full">
+         <div className=" flex lg:container border-b max-w-6xl w-11/12 lg:w-4/5 mx-auto flex-nowrap align-middle justify-between dark:border-white border-slate-900 py-6 ">
             <div className="lg:hidden flex items-center">
-               <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-               >
-                  <path
-                     strokeLinecap="round"
-                     strokeLinejoin="round"
-                     strokeWidth={2}
-                     d="M4 6h16M4 12h16M4 18h16"
-                  />
-               </svg>
+               <HiMenu className="w-6 h-6" />
             </div>
 
             <Link href="/">
