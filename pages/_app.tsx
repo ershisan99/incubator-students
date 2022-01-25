@@ -4,7 +4,6 @@ import Layout from "../components/Layout";
 import { ThemeProvider } from "next-themes";
 import { ApolloProvider } from "@apollo/client";
 import client from "../apollo-client";
-import "semantic-ui-css/semantic.min.css";
 function MyApp({ Component, pageProps }: AppProps) {
    return (
       <ApolloProvider client={client}>
