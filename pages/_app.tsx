@@ -2,14 +2,18 @@ import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import Layout from "../components/Layout";
 import { ThemeProvider } from "next-themes";
-
+import { ApolloProvider } from "@apollo/client";
+import client from "../apollo-client";
+import "semantic-ui-css/semantic.min.css";
 function MyApp({ Component, pageProps }: AppProps) {
    return (
-      <ThemeProvider attribute="class">
-         <Layout>
-            <Component {...pageProps} />
-         </Layout>
-      </ThemeProvider>
+      <ApolloProvider client={client}>
+         <ThemeProvider attribute="class">
+            <Layout>
+               <Component {...pageProps} />
+            </Layout>
+         </ThemeProvider>
+      </ApolloProvider>
    );
 }
 
