@@ -67,15 +67,15 @@ const Header = () => {
    console.log(todolistManuals);
 
    return (
-      <nav className=" container flex mx-auto justify-center flex-nowrap px-10 mb-8">
-         <div className=" flex container border-b w-full flex-nowrap align-middle justify-start dark:border-white border-slate-900 py-6">
+      <nav className=" container mx-auto flex justify-center flex-nowrap px-10 mb-8">
+         <div className=" flex container border-b w-full flex-nowrap align-middle justify-between dark:border-white border-slate-900 py-6">
             <Link href="/">
-               <div className=" flex flex-nowrap cursor-pointer self-start font-bold text-4xl ">
+               <div className=" flex cursor-pointer font-bold text-4xl ">
                   it-incubator.by
                </div>
             </Link>
-            <div className=" md:flex hidden flex-auto items-center justify-end">
-               <div className="flex justify-end items-center cursor-pointer">
+            <div className=" lg:flex hidden  items-center justify-end">
+               <div className="flex items-center cursor-pointer">
                   <div className="px-4">
                      <IconContext.Provider
                         value={{
@@ -95,7 +95,7 @@ const Header = () => {
                      </IconContext.Provider>
                   </div>
 
-                  <span className="px-4">
+                  <span className="px-4 ">
                      <Dropdown
                         buttonText={"Домашки"}
                         menuItems={menuItems.homeworks}
