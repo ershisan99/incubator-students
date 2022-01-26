@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useTheme } from "next-themes";
 import { MdOutlineDarkMode, MdOutlineLightMode } from "react-icons/md";
 import { IconContext } from "react-icons";
-import { Dropdown } from "./Dropdown";
+import { Dropdown, MyLink } from "./Dropdown";
 import { HiMenu, HiX } from "react-icons/hi";
 import { Disclosure } from "@headlessui/react";
 
@@ -46,26 +46,10 @@ const Header = () => {
       return null;
    }
 
-   const categories = Object.keys(data);
-
    const homeworks = data.homeworks;
    const homeworksByIgnat = data.homeworksByIgnat;
    const notes = data.notes;
    const todolistManuals = data.todolistManuals;
-
-   //TODO: this is fucking disgusting
-   const menuItems = {
-      homeworks: data.homeworks.map((homework: any) => homework.title),
-      homeworksByIgnat: data.homeworksByIgnat.map((task: any) => task.title),
-      notes: data.notes.map((note: any) => note.title),
-      todolistManuals: data.todolistManuals.map((manual: any) => manual.title),
-   };
-
-   console.log(categories);
-   console.log(homeworks);
-   console.log(homeworksByIgnat);
-   console.log(notes);
-   console.log(todolistManuals);
 
    return (
       <Disclosure as="nav">
@@ -120,26 +104,30 @@ const Header = () => {
 
                                  <span className="px-4 ">
                                     <Dropdown
+                                       category="homeworks"
                                        buttonText={"Домашки"}
-                                       menuItems={menuItems.homeworks}
+                                       menuItems={data.homeworks}
                                     />
                                  </span>
                                  <span className="px-4">
                                     <Dropdown
+                                       category="homeworksByIgnat"
                                        buttonText={"Домашки от Игната"}
-                                       menuItems={menuItems.homeworksByIgnat}
+                                       menuItems={data.homeworksByIgnat}
                                     />
                                  </span>
                                  <span className="px-4">
                                     <Dropdown
+                                       category="todolist"
                                        buttonText={"To-do List"}
-                                       menuItems={menuItems.todolistManuals}
+                                       menuItems={data.todolistManuals}
                                     />
                                  </span>
                                  <span className="px-4">
                                     <Dropdown
+                                       category="notes"
                                        buttonText={"Памятка студента"}
-                                       menuItems={menuItems.notes}
+                                       menuItems={data.notes}
                                     />
                                  </span>
                               </div>
@@ -150,15 +138,77 @@ const Header = () => {
                </div>
                <Disclosure.Panel className="lg:hidden">
                   <div className="mx-auto w-11/12">
-                     <Disclosure.Button
-                        as="a"
-                        href={"/"}
-                        className={
-                           "no-underline bg-slate-800 text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                        }
-                     >
-                        Домашки от Игната
-                     </Disclosure.Button>
+                     <Disclosure>
+                        <div className="mx-auto w-11/12">
+                           <Disclosure.Button>Домашки</Disclosure.Button>
+                           <Disclosure.Panel>
+                              {data.homeworks.map(
+                                 (el: { title: string; slug: string }) => {
+                                    return (
+                                       <MyLink href={"/homeworks/" + el.slug}>
+                                          {el.title}
+                                       </MyLink>
+                                    );
+                                 }
+                              )}
+                           </Disclosure.Panel>
+                        </div>
+                     </Disclosure>
+                     <Disclosure>
+                        <div className="mx-auto w-11/12">
+                           <Disclosure.Button>
+                              Домашки от Игната
+                           </Disclosure.Button>
+                           <Disclosure.Panel>
+                              {data.homeworksByIgnat.map(
+                                 (el: { title: string; slug: string }) => {
+                                    return (
+                                       <MyLink
+                                          href={"/homeworksByIgnat/" + el.slug}
+                                       >
+                                          {el.title}
+                                       </MyLink>
+                                    );
+                                 }
+                              )}
+                           </Disclosure.Panel>
+                        </div>
+                     </Disclosure>
+                     <Disclosure>
+                        {" "}
+                        <div className="mx-auto w-11/12">
+                           <Disclosure.Button>To-do List</Disclosure.Button>
+                           <Disclosure.Panel>
+                              {data.todolistManuals.map(
+                                 (el: { title: string; slug: string }) => {
+                                    return (
+                                       <MyLink href={"/todolist/" + el.slug}>
+                                          {el.title}
+                                       </MyLink>
+                                    );
+                                 }
+                              )}
+                           </Disclosure.Panel>
+                        </div>
+                     </Disclosure>
+                     <Disclosure>
+                        <div className="mx-auto w-11/12">
+                           <Disclosure.Button>
+                              Памятка студента
+                           </Disclosure.Button>
+                           <Disclosure.Panel>
+                              {data.notes.map(
+                                 (el: { title: string; slug: string }) => {
+                                    return (
+                                       <MyLink href={"/notes/" + el.slug}>
+                                          {el.title}
+                                       </MyLink>
+                                    );
+                                 }
+                              )}
+                           </Disclosure.Panel>
+                        </div>
+                     </Disclosure>
                   </div>
                </Disclosure.Panel>
             </>
@@ -199,92 +249,3 @@ export async function getStaticProps() {
       props: { data: data },
    };
 }
-
-// return (
-//    <nav className={""}>
-//       <div className=" flex lg:container border-b max-w-6xl w-11/12 lg:w-4/5 mx-auto flex-nowrap align-middle justify-between dark:border-white border-slate-900 py-6 ">
-//          <div
-//             className="lg:hidden flex items-center"
-//             onClick={() => setMenuOpen(!menuOpen)}
-//          >
-//             <HiMenu className="w-6 h-6" />
-//             <div className="flex-grow md:block px-4 pb-4 md:pb-0 md:overflow-y-auto block"></div>
-//          </div>
-
-//          <Link href="/">
-//             <div className=" flex cursor-pointer font-bold text-4xl lg:px-0 pr-2 ">
-//                it-incubator.by
-//             </div>
-//          </Link>
-
-//          <div
-//             className={
-//                "lg:flex lg:items-center " +
-//                (menuOpen ? "flex flex-col grow overflow-y-auto " : "hidden")
-//             }
-//          >
-//             <div className="flex items-center cursor-pointer">
-//                <div className="px-4">
-//                   <IconContext.Provider
-//                      value={{
-//                         size: "1.5rem",
-//                         style: { verticalAlign: "middle" },
-//                      }}
-//                   >
-//                      {theme === "dark" ? (
-//                         <MdOutlineLightMode
-//                            onClick={() => setTheme("light")}
-//                         />
-//                      ) : (
-//                         <MdOutlineDarkMode
-//                            onClick={() => setTheme("dark")}
-//                         />
-//                      )}
-//                   </IconContext.Provider>
-//                </div>
-
-//                <span className="px-4 ">
-//                   <Dropdown
-//                      buttonText={"Домашки"}
-//                      menuItems={menuItems.homeworks}
-//                   />
-//                </span>
-//                <span className="px-4">
-//                   <Dropdown
-//                      buttonText={"Домашки от Игната"}
-//                      menuItems={menuItems.homeworksByIgnat}
-//                   />
-//                </span>
-//                <span className="px-4">
-//                   <Dropdown
-//                      buttonText={"To-do List"}
-//                      menuItems={menuItems.todolistManuals}
-//                   />
-//                </span>
-//                <span className="px-4">
-//                   <Dropdown
-//                      buttonText={"Памятка студента"}
-//                      menuItems={menuItems.notes}
-//                   />
-//                </span>
-//             </div>
-//          </div>
-//       </div>
-//       {/* {menuOpen && (
-//          <div className="">
-//             <div className=" flex lg:container border-b max-w-6xl w-11/12 lg:w-4/5 mx-auto flex-nowrap align-middle justify-between dark:border-white border-slate-900 py-6 ">
-//                <div className="lg:hidden flex items-center">
-//                   <HiMenu className="w-6 h-6" />
-//                   <div className="flex-grow md:block px-4 pb-4 md:pb-0 md:overflow-y-auto block"></div>
-//                </div>
-
-//                <Link href="/">
-//                   <div className=" flex cursor-pointer font-bold text-4xl lg:px-0 pr-2 ">
-//                      it-incubator.by
-//                   </div>
-//                </Link>
-//             </div>
-//          </div>
-//       )} */}
-//    </nav>
-// );

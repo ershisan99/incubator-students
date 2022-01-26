@@ -5,12 +5,13 @@ import { IconContext } from "react-icons";
 import { RiArrowDropDownLine } from "react-icons/ri";
 
 type DropdownPropsType = {
+   category: string;
    buttonText: string;
    menuItems: DropdownItemsType;
 };
 
-type DropdownItemsType = Array<string>;
-function MyLink(props: { [x: string]: any; href: any; children: any }) {
+type DropdownItemsType = Array<{ title: string; slug: string }>;
+export function MyLink(props: { [x: string]: any; href: any; children: any }) {
    let { href, children, ...rest } = props;
    return (
       <Link href={href}>
@@ -26,7 +27,7 @@ export function Dropdown(props: DropdownPropsType) {
             <Menu.Button className="inline-flex justify-center w-full py-2 text-sm font-medium">
                {props.buttonText}
                <IconContext.Provider value={{ size: "2rem" }}>
-                  <RiArrowDropDownLine className="w-5 h-5 ml-2 -mr-1" />
+                  <RiArrowDropDownLine className="w-5 h-5  -mr-1" />
                </IconContext.Provider>
             </Menu.Button>
          </div>
@@ -48,9 +49,9 @@ export function Dropdown(props: DropdownPropsType) {
                               className={`${
                                  active && "dark:bg-slate-700 bg-gray-100"
                               } group flex rounded-md items-center w-full px-2 py-2 text-sm no-underline`}
-                              href="/account-settings"
+                              href={"/" + props.category + "/" + item.slug}
                            >
-                              {item}
+                              {item.title}
                            </MyLink>
                         )}
                      </Menu.Item>
