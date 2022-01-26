@@ -9,7 +9,7 @@ const HomeworksByIgnatPage = ({ homeworkByIgnat }: any) => {
       <>
          <Title>{homeworkByIgnat.title}</Title>
          {homeworkByIgnat.task.map((contentRaw: any) => (
-            <Card content={contentRaw.raw} />
+            <Card content={contentRaw.raw} key={contentRaw.raw} />
          ))}
       </>
    );
@@ -44,10 +44,10 @@ export const getStaticProps: any = async ({ params }: any) => {
          query: gql`
             query getHomeworkByIgnat($slug: String!) {
                homeworkByIgnat(where: { slug: $slug }) {
+                  title
                   task {
                      raw
                   }
-                  title
                }
             }
          `,
