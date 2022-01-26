@@ -7,7 +7,6 @@ import Card from "../../components/Card";
 const Notes = ({ note }: any) => {
    return (
       <>
-         <Title>{note.title}</Title>
          {note.content.map((contentRaw: any) => (
             <Card content={contentRaw.raw} />
          ))}
