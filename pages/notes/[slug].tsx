@@ -3,11 +3,11 @@ import React from "react";
 import client from "../../apollo-client";
 import Title from "../../components/Title";
 import Card from "../../components/Card";
-import { GetStaticPaths, GetStaticProps } from "next";
 
 const Notes = ({ note }: any) => {
    return (
       <>
+         <Title>{note.title}</Title>
          {note.content.map((contentRaw: any) => (
             <Card content={contentRaw.raw} />
          ))}
@@ -17,7 +17,7 @@ const Notes = ({ note }: any) => {
 
 export default Notes;
 
-export const getStaticPaths: GetStaticPaths = async () => {
+export async function getStaticPaths() {
    const { data } = await client.query({
       query: gql`
          query {
@@ -36,24 +36,26 @@ export const getStaticPaths: GetStaticPaths = async () => {
       paths,
       fallback: false, // false or 'blocking'
    };
-};
-
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-   const { data } = await client.query({
-      query: gql`
-         query getHomework($slug: String!) {
-            note(where: { slug: $slug }) {
-               content {
-                  raw
+}
+export const getStaticProps: any = async ({ params }: any) => {
+   if (params) {
+      const slug = params.slug;
+      const { data } = await client.query({
+         query: gql`
+            query getHomework($slug: String!) {
+               note(where: { slug: $slug }) {
+                  content {
+                     raw
+                  }
+                  title
                }
-               title
             }
-         }
-      `,
-      variables: { slug: params!.slug },
-   });
+         `,
+         variables: { slug },
+      });
 
-   return {
-      props: { note: data.note },
-   };
+      return {
+         props: { note: data.note },
+      };
+   }
 };
