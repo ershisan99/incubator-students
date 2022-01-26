@@ -37,24 +37,22 @@ export async function getStaticPaths() {
    };
 }
 export const getStaticProps: any = async ({ params }: any) => {
-   if (params) {
-      const slug = params.slug;
-      const { data } = await client.query({
-         query: gql`
-            query getHomework($slug: String!) {
-               note(where: { slug: $slug }) {
-                  content {
-                     raw
-                  }
-                  title
+   const slug = params.slug;
+   const { data } = await client.query({
+      query: gql`
+         query getHomework($slug: String!) {
+            note(where: { slug: $slug }) {
+               content {
+                  raw
                }
+               title
             }
-         `,
-         variables: { slug },
-      });
+         }
+      `,
+      variables: { slug },
+   });
 
-      return {
-         props: { note: data.note },
-      };
-   }
+   return {
+      props: { note: data.note },
+   };
 };
