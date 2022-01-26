@@ -3,6 +3,7 @@ import React from "react";
 import client from "../../apollo-client";
 import Title from "../../components/Title";
 import Card from "../../components/Card";
+import { GetStaticPaths, GetStaticProps } from "next";
 
 const Notes = ({ note }: any) => {
    return (
@@ -16,7 +17,7 @@ const Notes = ({ note }: any) => {
 
 export default Notes;
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
    const { data } = await client.query({
       query: gql`
          query {
@@ -35,9 +36,8 @@ export async function getStaticPaths() {
       paths,
       fallback: true, // false or 'blocking'
    };
-}
-export const getStaticProps: any = async ({ params }: any) => {
-   const slug = params.slug;
+};
+export const getStaticProps: GetStaticProps = async ({ params }) => {
    const { data } = await client.query({
       query: gql`
          query getHomework($slug: String!) {
@@ -49,7 +49,7 @@ export const getStaticProps: any = async ({ params }: any) => {
             }
          }
       `,
-      variables: { slug },
+      variables: { slug: params!.slug },
    });
 
    return {
